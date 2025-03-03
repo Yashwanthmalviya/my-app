@@ -8,10 +8,11 @@ function Sidebar() {
         <div className="sidebar">
             <div className="logo-container">
                 <div className="logo">
-                    <span>FS</span>
+                    FS
                 </div>
-                <span className="logo-text">FinSage ERP</span>
+                <span className="logo-text">FinSage</span>
             </div>
+
 
             <div className="menu-items">
                 <div className="menu-item">
