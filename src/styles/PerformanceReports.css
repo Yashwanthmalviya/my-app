@@ -1,0 +1,113 @@
+/* Sidebar */
+.sidebar {
+    background: #1d1d1d;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    width: 15%;
+  }
+  
+  .brand {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .nav-item {
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .nav-item:hover, .nav-item.active {
+    background: #333;
+    border-radius: 5px;
+  }
+  
+  /* Main Content */
+  .main-content {
+    margin-left: 16%;
+    padding: 20px;
+    background: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .content-wrapper {
+    max-width: 95%;
+    margin: auto;
+  }
+  
+  /* Filters */
+  .filter-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  /* Summary Cards */
+  .summary-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .summary-card {
+    width: 180px;
+    padding: 15px;
+    background: #007bff;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+  
+  /* Table */
+  .performance-table th {
+    background: #007bff;
+    color: white;
+    text-align: center;
+  }
+  
+  .performance-table td {
+    text-align: center;
+  }
+  
+  /* Buttons */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .sidebar {
+      width: 20%;
+    }
+    .main-content {
+      margin-left: 22%;
+    }
+    .filter-container {
+      flex-wrap: wrap;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .main-content {
+      margin-left: 0;
+    }
+    .summary-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  

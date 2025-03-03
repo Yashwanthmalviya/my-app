@@ -1,0 +1,27 @@
+.dashboard-container {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .sidebar {
+    height: 100vh;
+  }
+  
+  .sidebar-menu li {
+    padding: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .sidebar-menu li:hover {
+    background: #495057;
+    border-radius: 5px;
+  }
+  
+  .stat-card {
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #f1f3f5;
+  }
+  

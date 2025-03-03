@@ -1,0 +1,142 @@
+.main-content {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #263b54;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #334a68;
+    border-radius: 5px;
+    padding: 8px 15px;
+    width: 250px;
+  }
+  
+  .search-icon {
+    color: #aaa;
+    margin-right: 10px;
+  }
+  
+  .search-bar input {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    width: 100%;
+  }
+  
+  .search-bar input::placeholder {
+    color: #aaa;
+  }
+  
+  .add-button {
+    display: flex;
+    align-items: center;
+    background-color: #5b9bd5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .plus-icon {
+    margin-right: 8px;
+    font-size: 12px;
+  }
+  
+  .managers-section {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .managers-section h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .managers-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-header {
+    display: flex;
+    background-color: #f0f7ff;
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .table-row {
+    display: flex;
+    border-bottom: 1px solid #e1e1e1;
+  }
+  
+  .column {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .column.name {
+    width: 20%;
+  }
+  
+  .column.email {
+    width: 25%;
+  }
+  
+  .column.phone {
+    width: 15%;
+  }
+  
+  .column.teams {
+    width: 25%;
+  }
+  
+  .column.actions {
+    width: 15%;
+    justify-content: flex-start;
+  }
+  
+  .edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  
+  .edit-btn:hover {
+    color: #1890ff;
+  }
+  
+  .delete-btn:hover {
+    color: #ff4d4f;
+  }
