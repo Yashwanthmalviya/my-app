@@ -1,6 +1,8 @@
 import React from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+    LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+} from "recharts";
 import { FaDownload } from "react-icons/fa";
 import "../styles/AdministrativeControl.css";
 
@@ -31,55 +33,45 @@ const incentiveData = [
 
 const AdministrativeControl = () => {
     return (
-        <Container fluid className="p-4" style={{ width: "100%", marginLeft: "200px" }}>
+        <Container fluid className="admin-container">
             <Row>
-                {/* <Col md={3} className="sidebar bg-dark text-white p-3 rounded">
-                    <h4 className="mb-4">📊 FinSage ERP</h4>
-                    <ul className="list-unstyled">
-                        <li>🏠 Dashboard</li>
-                        <li>👥 Team Management</li>
-                        <li>📝 Assign Task</li>
-                        <li>🧑 Team Managers</li>
-                        <li className="fw-bold">🔧 Administrative Control</li>
-                        <li>📑 Performance Reports</li>
-                    </ul>
-                </Col> */}
-
-                <Col md={9}>
-                    <Card className="p-3 shadow-sm mb-3">
-                        <Row>
-                            <Col><h5>📌 Administrative Control Overview</h5></Col>
-                            <Col md={4}>
-                                <Form.Control type="search" placeholder="Search here..." />
+                <Col md={12}>
+                    <Card className="admin-header">
+                        <Row className="align-items-center">
+                            <Col>
+                                <h5>📌 Administrative Control Overview</h5>
+                            </Col>
+                            <Col md={4} className="text-end">
+                                <Form.Control type="search" placeholder="Search here..." className="admin-search" />
                             </Col>
                         </Row>
                     </Card>
 
-                    <Row className="mb-3">
+                    <Row className="admin-statistics">
                         <Col>
-                            <Card className="text-center p-3 shadow-sm">💰 Total Sales</Card>
+                            <Card className="admin-card">💰 Total Sales</Card>
                         </Col>
                         <Col>
-                            <Card className="text-center p-3 shadow-sm">🎯 Targets Achieved</Card>
+                            <Card className="admin-card">🎯 Targets Achieved</Card>
                         </Col>
                         <Col>
-                            <Card className="text-center p-3 shadow-sm">🏆 Total Incentives</Card>
+                            <Card className="admin-card">🏆 Total Incentives</Card>
                         </Col>
                     </Row>
 
-                    <Card className="p-3 shadow-sm mb-3">
+                    <Card className="admin-chart-card">
                         <Row className="align-items-center">
                             <Col md={4}>
-                                <Form.Select>
+                                <Form.Select className="admin-dropdown">
                                     <option>This Month</option>
                                     <option>Last Month</option>
                                 </Form.Select>
                             </Col>
                             <Col md={4}>
-                                <Button variant="outline-primary">Filter</Button>
+                                <Button variant="outline-primary" className="admin-filter-btn">Filter</Button>
                             </Col>
                             <Col md={4} className="text-end">
-                                <Button variant="outline-secondary">
+                                <Button variant="outline-secondary" className="admin-export-btn">
                                     <FaDownload /> Export
                                 </Button>
                             </Col>
@@ -100,7 +92,7 @@ const AdministrativeControl = () => {
 
                     <Row>
                         <Col md={6}>
-                            <Card className="p-3 shadow-sm">
+                            <Card className="admin-chart-card">
                                 <h6>📊 Team Performance</h6>
                                 <ResponsiveContainer width="100%" height={200}>
                                     <BarChart data={teamPerformance}>
@@ -113,7 +105,7 @@ const AdministrativeControl = () => {
                             </Card>
                         </Col>
                         <Col md={6}>
-                            <Card className="p-3 shadow-sm">
+                            <Card className="admin-chart-card">
                                 <h6>💰 Incentive Distribution</h6>
                                 <ResponsiveContainer width="100%" height={200}>
                                     <BarChart data={incentiveData}>
