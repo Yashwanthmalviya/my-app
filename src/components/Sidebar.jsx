@@ -35,7 +35,7 @@ function Sidebar() {
 
                 <div className="menu-item">
                     <FaUserFriends className="icon" />
-                    <Link to="/team-manager-overview"><span>Team Management</span></Link>
+                    <Link to="/team-management"><span>Team Management</span></Link>
                 </div>
 
                 <div className="menu-item">

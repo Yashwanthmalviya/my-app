@@ -7,13 +7,23 @@ import TeamManagerOverview from "./pages/TeamManagerOverview";
 import PerformanceReports from "./pages/PerformanceReports";
 import AdministrativeControl from "./pages/AdministrativeControl";
 import AssignTask from "./pages/AssignTask";
+import Dashboard from "./pages/Dashboard";
+import TeamManagement from "./pages/TeamManagement";
 
-// Layout for pages that require Sidebar
+// ✅ Helper function to check if user is authenticated
+const isAuthenticated = () => !!localStorage.getItem("token");
+
+// ✅ Protected Route Wrapper
+const ProtectedRoute = ({ children }) => {
+  return isAuthenticated() ? children : <Navigate to="/admin-login" />;
+};
+
+// ✅ Layout with Sidebar (Ensures Proper Styling)
 const Layout = ({ children }) => {
   return (
-    <div className="app">
+    <div className="app-container">
       <Sidebar />
-      <div className="content">{children}</div>
+      <div className="app-content">{children}</div>
     </div>
   );
 };
@@ -22,51 +32,82 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Authentication Routes */}
-        <Route path="/" element={<Navigate to="/team-manager-overview" />} />
-        <Route path="/AdminLogin" element={<AdminLogin />} />
-        <Route path="/AdminSignUp" element={<AdminSignUp />} />
+        {/* 🔹 Redirect users based on authentication */}
+        <Route
+          path="/"
+          element={isAuthenticated() ? <Navigate to="/dashboard" /> : <Navigate to="/admin-login" />}
+        />
 
-        {/* Dashboard Routes - With Sidebar */}
+        {/* 🔹 Authentication Pages */}
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin-signup" element={<AdminSignUp />} />
+
+        {/* 🔹 Dashboard Pages (Require Authentication) */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/team-management"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <TeamManagement />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/team-manager-overview"
           element={
-            <Layout>
-              <TeamManagerOverview />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <TeamManagerOverview />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/assign-task"
           element={
-            <Layout>
-              <AssignTask />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <AssignTask />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/administrative-control"
           element={
-            <Layout>
-              <AdministrativeControl />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <AdministrativeControl />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/performance-reports"
           element={
-            <Layout>
-              <PerformanceReports />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <PerformanceReports />
+              </Layout>
+            </ProtectedRoute>
           }
         />
 
-
-        {/* Remove catch-all redirect to login */}
-        <Route path="*" element={<Navigate to="/AdminLogin" />} />
+        {/* 🔹 Catch-All Route */}
+        <Route path="*" element={<Navigate to="/admin-login" />} />
       </Routes>
     </Router>
-
   );
 }
 

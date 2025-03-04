@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/TeamManagerOverview.css";
-import { FaSearch, FaPlus, FaPen, FaTrash } from "react-icons/fa";
+import { FaSearch, FaPlus, FaPen, FaTrash, FaTimes } from "react-icons/fa";
 
 function TeamManagerOverview() {
     const [managers, setManagers] = useState([
@@ -11,6 +11,66 @@ function TeamManagerOverview() {
         { id: 5, name: "Manager 5", email: "M5@gmail.com", phone: "741852963", team: "Team 5" },
     ]);
 
+    const [showModal, setShowModal] = useState(false);
+    const [newManager, setNewManager] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        team: "",
+    });
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    // Handle Input Change
+    const handleAddManager = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+
+        const token = localStorage.getItem("token"); // Retrieve token from local storage
+
+        if (!token) {
+            setError("Authentication token not found. Please log in.");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const response = await fetch("https://erp-r0hx.onrender.com/api/manager/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify(newManager),
+            });
+
+            const data = await response.json();
+
+            console.log("Response Data:", data); // ✅ Debugging response
+
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to add manager.");
+            }
+
+            // ✅ Update the manager list dynamically
+            setManagers((prevManagers) => [...prevManagers, data.manager]);
+
+            // ✅ Reset modal state after success
+            setNewManager({ name: "", email: "", phone: "", team: "" });
+            setShowModal(false);
+        } catch (error) {
+            console.error("Error registering manager:", error.message); // ✅ Debugging error
+            setError(error.message);
+        } finally {
+            setLoading(false); // ✅ Ensure loading is set to false in all cases
+        }
+    };
+
+
+
+
     return (
         <div className="main-content">
             {/* Header Section */}
@@ -20,7 +80,7 @@ function TeamManagerOverview() {
                     <FaSearch className="search-icon" />
                     <input type="text" placeholder="Search managers..." className="search-input" />
                 </div>
-                <button className="add-button">
+                <button className="add-button" onClick={() => setShowModal(true)}>
                     <FaPlus className="plus-icon" />
                     Add Manager
                 </button>
@@ -52,8 +112,32 @@ function TeamManagerOverview() {
                     ))}
                 </div>
             </div>
+
+            {/* Add Manager Modal */}
+            {showModal && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <div className="modal-header">
+                            <h3>Add New Manager</h3>
+                            <FaTimes className="close-icon" onClick={() => setShowModal(false)} />
+                        </div>
+
+                        {error && <p className="error-message">{error}</p>}
+
+                        <form onSubmit={handleAddManager} className="modal-form">
+                            <input type="text" name="name" placeholder="Name" value={newManager.name} onChange={handleInputChange} required />
+                            <input type="email" name="email" placeholder="Email" value={newManager.email} onChange={handleInputChange} required />
+                            <input type="text" name="phone" placeholder="Phone" value={newManager.phone} onChange={handleInputChange} required />
+                            <input type="text" name="team" placeholder="Team" value={newManager.team} onChange={handleInputChange} required />
+
+                            <button type="submit" className="submit-btn" disabled={loading}>
+                                {loading ? "Adding..." : "Add Manager"}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
-
 export default TeamManagerOverview;

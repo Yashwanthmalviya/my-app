@@ -1,0 +1,131 @@
+/* 🌟 General Styling */
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+} */
+
+/* 🔴 Navbar Container */
+.navbar-container {
+    background: #ffffff;
+    padding: 15px 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 🔵 Navbar */
+.navbar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-section .btn2 {
+    display: flex;
+    align-items: center;
+    background: #f1f3f5;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-icon {
+    margin-right: 5px;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    font-size: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+/* 🔵 Stats Section */
+.stats-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background: white;
+}
+
+/* 🟦 Each Stat Card */
+.stat-card {
+    background: #3498db;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    flex: 1;
+    min-width: 180px;
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+/* 🟢 Performance Section */
+.performance-container {
+    width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 📈 Chart Section */
+.performance-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-title {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* 🔄 Responsive Design */
+@media (max-width: 768px) {
+    .stats-section {
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .stat-card {
+        width: 100%;
+        max-width: none;
+    }
+}
