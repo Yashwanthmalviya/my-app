@@ -4,7 +4,7 @@
     top: 0;
     width: 240px;
     height: 100vh;
-    background-color: #121829;  /* Dark navy for a professional look */
+    background-color: #121829; /* Dark navy for a professional look */
     padding-top: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -41,6 +41,29 @@
     margin-left: 12px;
     font-family: 'Poppins', sans-serif;
 }
+
+/* Admin Info Section */
+.admin-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.admin-icon {
+    font-size: 40px;
+    color: #4a90e2;
+    margin-bottom: 8px;
+}
+
+.admin-name {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
 /* Menu Items */
 .menu-items {
     display: flex;
@@ -83,6 +106,6 @@
 
 /* Adjust main content to make space for sidebar */
 .main-content {
-    margin-left: 220px; /* Same as sidebar width */
+    margin-left: 240px; /* Same as sidebar width */
     padding: 20px;
 }

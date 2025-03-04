@@ -1,18 +1,31 @@
-import React from 'react';
-import '../styles/Sidebar.css';
-import { Link } from 'react-router-dom';
-import { FaTh, FaUserFriends, FaTasks, FaUsersCog, FaShieldAlt, FaChartBar } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import "../styles/Sidebar.css";
+import { Link } from "react-router-dom";
+import { FaTh, FaUserFriends, FaTasks, FaUsersCog, FaShieldAlt, FaChartBar, FaUserCircle } from "react-icons/fa";
 
 function Sidebar() {
+    const [adminName, setAdminName] = useState("");
+
+    useEffect(() => {
+        // Fetch admin's name from localStorage
+        const storedAdminName = localStorage.getItem("adminName");
+        if (storedAdminName) {
+            setAdminName(storedAdminName);
+        }
+    }, []);
+
     return (
         <div className="sidebar">
             <div className="logo-container">
-                <div className="logo">
-                    FS
-                </div>
+                <div className="logo">FS</div>
                 <span className="logo-text">FinSage</span>
             </div>
 
+            {/* Admin Info Section */}
+            <div className="admin-info">
+                <FaUserCircle className="admin-icon" />
+                <span className="admin-name">{adminName ? `Hello, ${adminName}` : "Welcome, Admin"}</span>
+            </div>
 
             <div className="menu-items">
                 <div className="menu-item">
