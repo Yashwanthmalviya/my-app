@@ -22,7 +22,7 @@ const data = [
 const Dashboard = () => {
     return (
         <div className="dashboard-container">
-            {/* 🔴 Navbar Section */}
+            {/* Navbar Section */}
             <div className="navbar-container">
                 <div className="navbar">
                     <button className="dashboard-btn">Dashboard Overview</button>
@@ -40,7 +40,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            {/* 🔵 Stats Section */}
+            {/* Stats Section */}
             <div className="stats-section">
                 <div className="stat-card">Total Managers</div>
                 <div className="stat-card">Active Teams</div>
@@ -48,10 +48,10 @@ const Dashboard = () => {
                 <div className="stat-card">Sales</div>
             </div>
 
-            {/* 🟢 Performance Chart Section */}
+            {/* Performance Chart Section */}
             <div className="performance-container">
                 <div className="performance-section">
-                    <h3 className="chart-title">📊 Performance Overview</h3>
+                    <h3 className="chart-title"> Performance Overview</h3>
                     <ResponsiveContainer width="100%" height={350}>
                         <LineChart data={data} margin={{ top: 20, right: 30, left: 10, bottom: 20 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#D9D9D9" />

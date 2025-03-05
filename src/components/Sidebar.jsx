@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Sidebar.css";
-import { Link } from "react-router-dom";
-import { FaTh, FaUserFriends, FaTasks, FaUsersCog, FaShieldAlt, FaChartBar, FaUserCircle } from "react-icons/fa";
+import { FaTh, FaUserFriends, FaTasks, FaUsersCog, FaShieldAlt, FaChartBar, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 
 function Sidebar() {
     const [adminName, setAdminName] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Fetch admin's name from localStorage
@@ -13,6 +14,34 @@ function Sidebar() {
             setAdminName(storedAdminName);
         }
     }, []);
+
+    const handleLogout = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await fetch("https://erp-r0hx.onrender.com/api/auth/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Logout failed!");
+            }
+
+            // Clear localStorage on successful logout
+            localStorage.removeItem("token");
+            localStorage.removeItem("adminName");
+
+            // Navigate to the login page
+            navigate("/admin-login");
+        } catch (error) {
+            console.error("Error during logout:", error);
+            // Optionally, handle error (e.g., display error message)
+        }
+    };
 
     return (
         <div className="sidebar">
@@ -56,6 +85,12 @@ function Sidebar() {
                 <div className="menu-item">
                     <FaChartBar className="icon" />
                     <Link to="/performance-reports"><span>Performance Reports</span></Link>
+                </div>
+
+                {/* Logout Button */}
+                <div className="menu-item" onClick={handleLogout} style={{ cursor: "pointer" }}>
+                    <FaSignOutAlt className="icon" />
+                    <span>Logout</span>
                 </div>
             </div>
         </div>

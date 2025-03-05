@@ -1,71 +1,8 @@
-/* Sidebar */
-.sidebar {
-    background: #1d1d1d;
-    color: white;
-    height: 100vh;
-    padding: 20px;
-    position: fixed;
-    width: 240px;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-}
 
-.sidebar .logo-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.sidebar .logo {
-    width: 40px;
-    height: 40px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 18px;
-    margin-right: 10px;
-}
-
-.sidebar .logo-text {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.sidebar .menu-items {
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar .menu-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 15px;
-    color: #ddd;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-bottom: 5px;
-}
-
-.sidebar .menu-item:hover,
-.sidebar .menu-item.active {
-    background-color: #007bff;
-    color: white;
-    border-left: 4px solid white;
-}
-
-.sidebar .menu-item .icon {
-    margin-right: 10px;
-    font-size: 18px;
-}
 
 /* Main Content */
 .main-content {
-    margin-left: 260px;
+    /* margin-left: 260px; */
     padding: 20px;
     background: #f8f9fa;
     min-height: 100vh;
@@ -157,30 +94,5 @@
     gap: 5px;
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-    .sidebar {
-        width: 200px;
-    }
-    .main-content {
-        margin-left: 220px;
-    }
-    .filter-container {
-        flex-wrap: wrap;
-    }
-}
 
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-    .main-content {
-        margin-left: 0;
-    }
-    .summary-container {
-        flex-direction: column;
-        align-items: center;
-    }
-}
+

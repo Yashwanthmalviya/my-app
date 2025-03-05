@@ -3,7 +3,7 @@ import '../styles/AssignTask.css';
 
 function AssignTask() {
     return (
-        <div className="main-content">
+        <div className="assign-main-content">
             {/* Page Header */}
             <div className="header">
                 <div className="title">Assign Task</div>

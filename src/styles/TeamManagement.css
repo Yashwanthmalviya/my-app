@@ -2,20 +2,20 @@
 .dashboard-container {
     background-color: #ffffff; /* White background */
     min-height: 100vh;
-    margin-left: 240px; /* Adjusted for sidebar */
+    
     padding: 20px;
+    width: 100%;
     color: #121829; /* Dark navy for text */
     font-family: 'Poppins', sans-serif;
 }
 
 /* Navbar Styling */
 .dashboard-navbar {
-     background-color: #121829; /* Dark navy for a professional look */
-     /* Dark navy, consistent with sidebar */
+    background-color: #121829; /* Dark navy for a professional look */
     padding: 15px 20px;
     display: flex;
     width: 83%;
-    border-radius:10px;
+    border-radius: 10px;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid rgba(0, 0, 0, 0.1);
@@ -112,4 +112,36 @@
 
 .table td {
     color: #333;
+}
+
+/* Responsive Styles for Mobile View */
+@media screen and (max-width: 768px) {
+    /* Adjust sidebar width is defined in your sidebar CSS; ensure the content aligns with it */
+    .dashboard-container {
+        margin-left: 60px; /* Updated to match collapsed sidebar width */
+        padding: 15px;
+    }
+    
+    .dashboard-navbar {
+        width: calc(100% - 60px); /* Adjust width based on sidebar width */
+        padding: 10px 15px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .search-bar {
+        max-width: 150px;
+    }
+    
+    .chart-card, .stat-card {
+        padding: 15px;
+    }
+    
+    .stat-card {
+        font-size: 14px;
+    }
+    
+    .table {
+        font-size: 14px;
+    }
 }

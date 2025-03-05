@@ -2,7 +2,7 @@
     background-color: #f8f9fa;
     min-height: 100vh;
     padding: 20px;
-    margin-left: 220px; /* Adjust this based on your sidebar width */
+    margin-left: 320px; /* Adjust this based on your sidebar width */
     width: calc(100% - 220px); /* Ensures it doesn't overflow */
     transition: all 0.3s ease-in-out;
 }
