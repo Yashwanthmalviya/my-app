@@ -3,35 +3,29 @@ import "../styles/TeamManagerOverview.css";
 import { FaSearch, FaPlus, FaPen, FaTrash } from "react-icons/fa";
 
 function TeamManagerOverview() {
-    const [managers, setManagers] = useState([
-        { id: 1, name: "Manager 1", email: "M1@gmail.com", phone: "125125125", team: "Team 1" },
-        { id: 2, name: "Manager 2", email: "M2@gmail.com", phone: "569741524", team: "Team 2" },
-        { id: 3, name: "Manager 3", email: "M3@gmail.com", phone: "456789123", team: "Team 3" },
-        { id: 4, name: "Manager 4", email: "M4@gmail.com", phone: "369852147", team: "Team 4" },
-        { id: 5, name: "Manager 5", email: "M5@gmail.com", phone: "741852963", team: "Team 5" },
-    ]);
-
+    const [managers, setManagers] = useState([]);
     const [showAddForm, setShowAddForm] = useState(false);
     const [newManager, setNewManager] = useState({
         name: "",
         email: "",
+        password: "",
         phone: "",
-        team: "",
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    // Update the new manager state when input changes.
     const handleInputChange = (e) => {
         setNewManager({ ...newManager, [e.target.name]: e.target.value });
     };
 
+    // Add a new manager.
     const handleAddManager = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError("");
 
         const token = localStorage.getItem("token");
-
         if (!token) {
             setError("Authentication token not found. Please log in.");
             setLoading(false);
@@ -54,17 +48,57 @@ function TeamManagerOverview() {
                 throw new Error(data.message || "Failed to add manager.");
             }
 
-            // Update the manager list dynamically
-            setManagers((prevManagers) => [...prevManagers, data.manager]);
+            // Attempt to retrieve the new manager from the response.
+            let managerData = data.manager;
+            if (!managerData) {
+                // If the response doesn't contain the new manager, create one using form data.
+                managerData = { ...newManager, id: Date.now() };
+            }
 
-            // Reset the form and hide it
-            setNewManager({ name: "", email: "", phone: "", team: "" });
+            // Format the manager for display in the table.
+            const formattedManager = {
+                id: managerData._id || managerData.id || Date.now(),
+                name: managerData.user?.name || managerData.name || newManager.name,
+                email: managerData.user?.email || managerData.email || newManager.email,
+                phone: managerData.user?.phone || managerData.phone || newManager.phone,
+            };
+
+            // Append the new manager to the table.
+            setManagers((prevManagers) => [...prevManagers, formattedManager]);
+
+            // Reset form fields and hide the form.
+            setNewManager({ name: "", email: "", password: "", phone: "" });
             setShowAddForm(false);
         } catch (error) {
             setError(error.message);
         } finally {
             setLoading(false);
         }
+    };
+
+    // Delete manager from table.
+    const handleDeleteManager = async (managerId) => {
+        // Optional: Call your backend delete endpoint to remove the manager from the server.
+        // const token = localStorage.getItem("token");
+        // try {
+        //   const response = await fetch(`https://erp-r0hx.onrender.com/api/manager/${managerId}`, {
+        //       method: "DELETE",
+        //       headers: {
+        //           "Authorization": `Bearer ${token}`,
+        //       },
+        //   });
+        //   if (!response.ok) {
+        //       throw new Error("Failed to delete manager.");
+        //   }
+        // } catch (error) {
+        //   setError(error.message);
+        //   return;
+        // }
+
+        // Remove the manager from the table.
+        setManagers((prevManagers) =>
+            prevManagers.filter((manager) => manager.id !== managerId)
+        );
     };
 
     return (
@@ -110,6 +144,14 @@ function TeamManagerOverview() {
                             required
                         />
                         <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            value={newManager.password}
+                            onChange={handleInputChange}
+                            required
+                        />
+                        <input
                             type="tel"
                             name="phone"
                             placeholder="Phone"
@@ -117,14 +159,6 @@ function TeamManagerOverview() {
                             onChange={handleInputChange}
                             required
                             pattern="[0-9]*"
-                        />
-                        <input
-                            type="text"
-                            name="team"
-                            placeholder="Team"
-                            value={newManager.team}
-                            onChange={handleInputChange}
-                            required
                         />
                         <div className="form-buttons">
                             <button type="submit" className="submit-btn" disabled={loading}>
@@ -146,7 +180,6 @@ function TeamManagerOverview() {
                         <div className="column">Name</div>
                         <div className="column">Email</div>
                         <div className="column">Phone</div>
-                        <div className="column">Team</div>
                         <div className="column actions">Actions</div>
                     </div>
 
@@ -155,12 +188,14 @@ function TeamManagerOverview() {
                             <div className="column">{manager.name}</div>
                             <div className="column">{manager.email}</div>
                             <div className="column">{manager.phone}</div>
-                            <div className="column">{manager.team}</div>
                             <div className="column actions">
                                 <button className="edit-btn">
                                     <FaPen />
                                 </button>
-                                <button className="delete-btn">
+                                <button
+                                    className="delete-btn"
+                                    onClick={() => handleDeleteManager(manager.id)}
+                                >
                                     <FaTrash />
                                 </button>
                             </div>

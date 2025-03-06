@@ -63,6 +63,6 @@ body {
 /* Responsive adjustment for mobile view */
 @media screen and (max-width: 768px) {
   .app-content {
-    margin-left: 60px; /* Adjust according to your collapsed sidebar width */
+    margin-left: 60px; 
   }
 }

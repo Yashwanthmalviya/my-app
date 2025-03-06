@@ -1,8 +1,9 @@
-import React from "react";
+// Dashboard.jsx
+import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
-import "../styles/Dashboard.css";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import "../styles/Dashboard.css";
 
 const data = [
     { name: "0", sales: 10, targets: 7, incentives: 0 },
@@ -20,6 +21,50 @@ const data = [
 ];
 
 const Dashboard = () => {
+    const [managers, setManagers] = useState([]);
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    // Call the API to fetch all managers when the component mounts
+    useEffect(() => {
+        const fetchManagers = async () => {
+            setLoading(true);
+            try {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    setError("Authentication token not found. Please log in.");
+                    setLoading(false);
+                    return;
+                }
+                const response = await fetch("https://erp-r0hx.onrender.com/api/manager/", {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+                const result = await response.json();
+                if (!response.ok) {
+                    setError(result.message || "Failed to fetch managers.");
+                } else {
+                    // If your API returns an array of managers directly, use it.
+                    // If the manager has a nested user object, you can extract the necessary fields.
+                    const formattedManagers = result.map((manager) => ({
+                        id: manager._id || manager.id,
+                        name: manager.user?.name || manager.name,
+                        email: manager.user?.email || manager.email,
+                        phone: manager.user?.phone || manager.phone,
+                    }));
+                    setManagers(formattedManagers);
+                }
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchManagers();
+    }, []);
+
     return (
         <div className="dashboard-container">
             {/* Navbar Section */}
@@ -42,7 +87,7 @@ const Dashboard = () => {
 
             {/* Stats Section */}
             <div className="stats-section">
-                <div className="stat-card">Total Managers</div>
+                <div className="stat-card">Total Managers: {managers.length}</div>
                 <div className="stat-card">Active Teams</div>
                 <div className="stat-card">Monthly Target</div>
                 <div className="stat-card">Sales</div>
@@ -51,7 +96,7 @@ const Dashboard = () => {
             {/* Performance Chart Section */}
             <div className="performance-container">
                 <div className="performance-section">
-                    <h3 className="chart-title"> Performance Overview</h3>
+                    <h3 className="chart-title">Performance Overview</h3>
                     <ResponsiveContainer width="100%" height={350}>
                         <LineChart data={data} margin={{ top: 20, right: 30, left: 10, bottom: 20 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke="#D9D9D9" />
@@ -70,6 +115,10 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Display any error or loading status */}
+            {error && <p className="error-message">{error}</p>}
+            {loading && <p>Loading managers...</p>}
         </div>
     );
 };

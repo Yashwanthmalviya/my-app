@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Container, Row, Col, Card, Table, Button, Navbar, Form, InputGroup } from "react-bootstrap";
 import { FaSearch, FaUserPlus } from "react-icons/fa";
@@ -14,34 +13,78 @@ const data = [
     { name: "5", Team1: 9, Team2: 7, Team3: 7, Team4: 6, Team5: 8 }
 ];
 
-const managers = [
-    { name: "Manager 1", team: "Team 1", project: "Project 1", completion: "95%", size: 25, performance: "80%" },
-    { name: "Manager 2", team: "Team 2", project: "Project 2", completion: "90%", size: 20, performance: "70%" },
-    { name: "Manager 3", team: "Team 3", project: "Project 3", completion: "85%", size: 18, performance: "81%" },
-    { name: "Manager 4", team: "Team 4", project: "Project 4", completion: "80%", size: 22, performance: "75%" },
-    { name: "Manager 5", team: "Team 5", project: "Project 5", completion: "78%", size: 15, performance: "70%" }
-];
-
 const TeamManagement = () => {
+    const [employees, setEmployees] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchEmployees = async () => {
+            setLoading(true);
+            try {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    setError("Authentication token not found. Please log in.");
+                    setLoading(false);
+                    return;
+                }
+                const response = await fetch("https://erp-r0hx.onrender.com/api/admin/employees", {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+                const result = await response.json();
+                if (!response.ok) {
+                    setError(result.message || "Failed to fetch employees.");
+                } else {
+                    // Check if the result is an array or an object with an employees property.
+                    if (Array.isArray(result)) {
+                        setEmployees(result);
+                    } else if (result.employees && Array.isArray(result.employees)) {
+                        setEmployees(result.employees);
+                    } else {
+                        setEmployees([]); // fallback to empty array if format is unexpected
+                    }
+                }
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchEmployees();
+    }, []);
+
     return (
-        <Container fluid className="dashboard-container">
+        <Container className="team-dashboard-container">
             <Navbar className="dashboard-navbar">
                 <Navbar.Brand>FinSage ERP</Navbar.Brand>
                 <InputGroup className="search-bar">
                     <Form.Control placeholder="Search here..." />
-                    <InputGroup.Text><FaSearch /></InputGroup.Text>
+                    <InputGroup.Text>
+                        <FaSearch />
+                    </InputGroup.Text>
                 </InputGroup>
-                <Button variant="primary"><FaUserPlus /> Add Manager</Button>
+                <Button variant="primary">
+                    <FaUserPlus /> Add Manager
+                </Button>
             </Navbar>
 
             <Row>
-
-
                 <Col md={10} className="content-area">
                     <Row className="g-3">
-                        <Col xs={12} sm={4}><Card className="stat-card">Total Managers</Card></Col>
-                        <Col xs={12} sm={4}><Card className="stat-card">Active Teams</Card></Col>
-                        <Col xs={12} sm={4}><Card className="stat-card">Average Performance</Card></Col>
+                        <Col xs={12} sm={4}>
+                            <Card className="stat-card">
+                                Total Managers: {employees.length}
+                            </Card>
+                        </Col>
+                        <Col xs={12} sm={4}>
+                            <Card className="stat-card">Active Teams</Card>
+                        </Col>
+                        <Col xs={12} sm={4}>
+                            <Card className="stat-card">Average Performance</Card>
+                        </Col>
                     </Row>
 
                     <Card className="chart-card mt-3">
@@ -64,6 +107,9 @@ const TeamManagement = () => {
                         </Card.Body>
                     </Card>
 
+                    {loading && <p>Loading employees...</p>}
+                    {error && <p className="error-message">{error}</p>}
+
                     <Table striped bordered hover className="mt-3">
                         <thead>
                             <tr>
@@ -76,14 +122,14 @@ const TeamManagement = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {managers.map((manager, index) => (
+                            {employees.map((employee, index) => (
                                 <tr key={index}>
-                                    <td>{manager.name}</td>
-                                    <td>{manager.team}</td>
-                                    <td>{manager.project}</td>
-                                    <td>{manager.completion}</td>
-                                    <td>{manager.size}</td>
-                                    <td>{manager.performance}</td>
+                                    <td>{employee.name}</td>
+                                    <td>{employee.team || "N/A"}</td>
+                                    <td>{employee.project || "N/A"}</td>
+                                    <td>{employee.completion || "N/A"}</td>
+                                    <td>{employee.size || "N/A"}</td>
+                                    <td>{employee.performance || "N/A"}</td>
                                 </tr>
                             ))}
                         </tbody>
