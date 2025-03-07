@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { adminLogin } from "../api/authAPI"; // Import API function
 import "../styles/AdminLogin.css";
+import { Link } from "react-router-dom";
 
 const AdminLogin = () => {
     const [email, setEmail] = useState("");
@@ -84,9 +85,14 @@ const AdminLogin = () => {
                         {loading ? "Logging in..." : "LOG IN"}
                     </button>
                 </form>
-                <Link to={"https://erp-dashboard-azure.vercel.app/"} > <button  className="login-button" >
-                        Back To HomePage
-                    </button></Link>
+                 <Link to={"https://erp-dashboard-azure.vercel.app/"} >
+                    <button
+                        type="submit"
+                        className="w-full mt-5 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+                    >
+                        Go To HomePage
+                    </button>
+                </Link>
             </div>
         </div>
     );
