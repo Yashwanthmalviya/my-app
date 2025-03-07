@@ -87,8 +87,8 @@ const AdminLogin = () => {
                 </form>
                  <Link to={"https://erp-dashboard-azure.vercel.app/"} >
                     <button
-                        type="submit"
-                        className="w-full mt-5 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+                        
+                        className="login-button"
                     >
                         Go To HomePage
                     </button>
