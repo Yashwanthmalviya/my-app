@@ -41,6 +41,7 @@ const AdminLogin = () => {
 
     return (
         <div className="login-container">
+
             <div className="login-form">
                 <h1 className="login-title">ADMIN LOGIN</h1>
                 {error && <p className="error-message">{error}</p>}
@@ -86,8 +87,8 @@ const AdminLogin = () => {
                 </form>
                 <Link to={"https://erp-dashboard-azure.vercel.app/"} >
                     <button
-                        type="submit"
-                        className="w-full mt-5 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+
+                        className="login-button mt-1"
                     >
                         Go To HomePage
                     </button>
