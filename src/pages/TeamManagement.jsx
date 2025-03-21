@@ -28,7 +28,7 @@ const TeamManagement = () => {
                     setLoading(false);
                     return;
                 }
-                const response = await fetch("https://erp-r0hx.onrender.com/api/admin/employees", {
+                const response = await fetch("https://erp-r0hx.onrender.com/api/manager/", {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }
@@ -60,7 +60,7 @@ const TeamManagement = () => {
         <Container className="team-dashboard-container">
             <Navbar className="dashboard-navbar">
                 <Navbar.Brand>FinSage ERP</Navbar.Brand>
-                <InputGroup className="search-bar">
+                {/* <InputGroup className="search-bar">
                     <Form.Control placeholder="Search here..." />
                     <InputGroup.Text>
                         <FaSearch />
@@ -68,7 +68,7 @@ const TeamManagement = () => {
                 </InputGroup>
                 <Button variant="primary">
                     <FaUserPlus /> Add Manager
-                </Button>
+                </Button> */}
             </Navbar>
 
             <Row>

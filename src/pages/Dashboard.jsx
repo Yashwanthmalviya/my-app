@@ -71,17 +71,17 @@ const Dashboard = () => {
             <div className="navbar-container">
                 <div className="navbar">
                     <button className="dashboard-btn">Dashboard Overview</button>
-                    <div className="search-section">
+                    {/* <div className="search-section">
                         <button className="btn2">
                             <FaSearch className="search-icon" /> Search<b>...</b>
                         </button>
-                    </div>
-                    <div className="icons">
+                    </div> */}
+                    {/* <div className="icons">
                         <span className="icon">🔔</span>
                         <div className="profile-section">
                             <IoIosArrowDown className="dropdown-icon" />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

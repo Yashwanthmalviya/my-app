@@ -69,7 +69,7 @@ const PerformanceReports = () => {
                                     <th>Target Assigned</th>
                                     <th>Achievement Rate</th>
                                     <th>Incentives Earned</th>
-                                    <th>Actions</th>
+                                    {/* <th>Actions</th> */}
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,11 +80,11 @@ const PerformanceReports = () => {
                                         <td>${manager.target.toLocaleString()}</td>
                                         <td>{manager.rate}%</td>
                                         <td>${manager.incentives.toLocaleString()}</td>
-                                        <td>
+                                        {/* <td>
                                             <Button variant="outline-dark">
                                                 <FaEdit />
                                             </Button>
-                                        </td>
+                                        </td> */}
                                     </tr>
                                 ))}
                             </tbody>
@@ -93,12 +93,12 @@ const PerformanceReports = () => {
                         {/* Buttons */}
                         <div className="button-container">
                             <div className="d-flex flex-wrap gap-2">
-                                <Button variant="secondary">
+                                {/* <Button variant="secondary">
                                     <FaFilePdf /> Download PDF
                                 </Button>
                                 <Button variant="secondary">
                                     <FaFileExcel /> Download Excel
-                                </Button>
+                                </Button> */}
                             </div>
                             <div className="d-flex flex-wrap gap-2">
                                 <Button variant="dark">Previous</Button>
