@@ -85,7 +85,7 @@ const AdminLogin = () => {
                         {loading ? "Logging in..." : "LOG IN"}
                     </button>
                 </form>
-                <Link to={"https://erp-dashboard-azure.vercel.app/"} >
+                <Link to={"https://erp-manager-dashboard.vercel.app/  "} >
                     <button
 
                         className="login-button mt-1"
