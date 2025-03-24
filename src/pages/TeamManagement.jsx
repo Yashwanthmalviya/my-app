@@ -79,12 +79,12 @@ const TeamManagement = () => {
                                 Total Managers: {employees.length}
                             </Card>
                         </Col>
-                        <Col xs={12} sm={4}>
+                        {/* <Col xs={12} sm={4}>
                             <Card className="stat-card">Active Teams</Card>
                         </Col>
                         <Col xs={12} sm={4}>
                             <Card className="stat-card">Average Performance</Card>
-                        </Col>
+                        </Col> */}
                     </Row>
 
                     <Card className="chart-card mt-3">

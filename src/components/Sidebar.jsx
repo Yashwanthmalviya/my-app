@@ -77,10 +77,10 @@ function Sidebar() {
                     <Link to="/team-manager-overview"><span>Team Managers</span></Link>
                 </div>
 
-                <div className="menu-item">
+                {/* <div className="menu-item">
                     <FaShieldAlt className="icon" />
                     <Link to="/administrative-control"><span>Administrative Control</span></Link>
-                </div>
+                </div> */}
 
                 <div className="menu-item">
                     <FaChartBar className="icon" />

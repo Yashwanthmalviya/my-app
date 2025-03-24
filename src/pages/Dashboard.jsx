@@ -88,9 +88,9 @@ const Dashboard = () => {
             {/* Stats Section */}
             <div className="stats-section">
                 <div className="stat-card">Total Managers: {managers.length}</div>
-                <div className="stat-card">Active Teams</div>
+                {/* <div className="stat-card">Active Teams</div>
                 <div className="stat-card">Monthly Target</div>
-                <div className="stat-card">Sales</div>
+                <div className="stat-card">Sales</div> */}
             </div>
 
             {/* Performance Chart Section */}

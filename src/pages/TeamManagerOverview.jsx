@@ -106,10 +106,10 @@ function TeamManagerOverview() {
             {/* Header Section */}
             <div className="header">
                 <h1 className="title">Team Manager Overview</h1>
-                <div className="search-container">
+                {/* <div className="search-container">
                     <FaSearch className="search-icon" />
                     <input type="text" placeholder="Search managers..." className="search-input" />
-                </div>
+                </div> */}
                 <button
                     className="add-button"
                     onClick={() => {
